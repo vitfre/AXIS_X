@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Atmel Studio Solution File, Format Version 11.00
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "ACCESSORY_DEVICE", "ACCESSORY_DEVICE_V0.6.008-a\ACCESSORY_DEVICE.cproj", "{DFB689FE-BBFE-4F5B-B708-5AA4FBA2C993}"
+EndProject
+Project("{54F91283-7BC4-4236-8FF9-10F437C3AD48}") = "AXIS_X", "MAIN_DEVICE_V0.7.0010-a\AXIS_X.cproj", "{4833E31B-F4E7-45E9-9247-043F61301B1A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|AVR = Debug|AVR
+		Release|AVR = Release|AVR
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DFB689FE-BBFE-4F5B-B708-5AA4FBA2C993}.Debug|AVR.ActiveCfg = Debug|AVR
+		{DFB689FE-BBFE-4F5B-B708-5AA4FBA2C993}.Debug|AVR.Build.0 = Debug|AVR
+		{DFB689FE-BBFE-4F5B-B708-5AA4FBA2C993}.Release|AVR.ActiveCfg = Release|AVR
+		{DFB689FE-BBFE-4F5B-B708-5AA4FBA2C993}.Release|AVR.Build.0 = Release|AVR
+		{4833E31B-F4E7-45E9-9247-043F61301B1A}.Debug|AVR.ActiveCfg = Debug|AVR
+		{4833E31B-F4E7-45E9-9247-043F61301B1A}.Debug|AVR.Build.0 = Debug|AVR
+		{4833E31B-F4E7-45E9-9247-043F61301B1A}.Release|AVR.ActiveCfg = Release|AVR
+		{4833E31B-F4E7-45E9-9247-043F61301B1A}.Release|AVR.Build.0 = Release|AVR
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

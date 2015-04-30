@@ -1,0 +1,526 @@
+
+ACCESSORY_DEVICE.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         000001f8  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000002  00800060  000001f8  0000028c  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .bss          00000002  00800062  00800062  0000028e  2**0
+                  ALLOC
+  3 .stab         000006b4  00000000  00000000  00000290  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  4 .stabstr      00000097  00000000  00000000  00000944  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .comment      0000002f  00000000  00000000  000009db  2**0
+                  CONTENTS, READONLY
+  6 .debug_aranges 00000030  00000000  00000000  00000a0a  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_info   00000402  00000000  00000000  00000a3a  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_abbrev 00000173  00000000  00000000  00000e3c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_line   00000279  00000000  00000000  00000faf  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_frame  0000005c  00000000  00000000  00001228  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_str    00000154  00000000  00000000  00001284  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_loc    00000330  00000000  00000000  000013d8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 13 .debug_ranges 00000070  00000000  00000000  00001708  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0e c0       	rjmp	.+28     	; 0x1e <__ctors_end>
+   2:	27 c0       	rjmp	.+78     	; 0x52 <__vector_1>
+   4:	25 c0       	rjmp	.+74     	; 0x50 <__bad_interrupt>
+   6:	24 c0       	rjmp	.+72     	; 0x50 <__bad_interrupt>
+   8:	23 c0       	rjmp	.+70     	; 0x50 <__bad_interrupt>
+   a:	2d c0       	rjmp	.+90     	; 0x66 <__vector_5>
+   c:	21 c0       	rjmp	.+66     	; 0x50 <__bad_interrupt>
+   e:	20 c0       	rjmp	.+64     	; 0x50 <__bad_interrupt>
+  10:	1f c0       	rjmp	.+62     	; 0x50 <__bad_interrupt>
+  12:	1e c0       	rjmp	.+60     	; 0x50 <__bad_interrupt>
+  14:	1d c0       	rjmp	.+58     	; 0x50 <__bad_interrupt>
+  16:	1c c0       	rjmp	.+56     	; 0x50 <__bad_interrupt>
+  18:	1b c0       	rjmp	.+54     	; 0x50 <__bad_interrupt>
+  1a:	1a c0       	rjmp	.+52     	; 0x50 <__bad_interrupt>
+  1c:	19 c0       	rjmp	.+50     	; 0x50 <__bad_interrupt>
+
+0000001e <__ctors_end>:
+  1e:	11 24       	eor	r1, r1
+  20:	1f be       	out	0x3f, r1	; 63
+  22:	cf ed       	ldi	r28, 0xDF	; 223
+  24:	cd bf       	out	0x3d, r28	; 61
+
+00000026 <__do_copy_data>:
+  26:	10 e0       	ldi	r17, 0x00	; 0
+  28:	a0 e6       	ldi	r26, 0x60	; 96
+  2a:	b0 e0       	ldi	r27, 0x00	; 0
+  2c:	e8 ef       	ldi	r30, 0xF8	; 248
+  2e:	f1 e0       	ldi	r31, 0x01	; 1
+  30:	02 c0       	rjmp	.+4      	; 0x36 <__do_copy_data+0x10>
+  32:	05 90       	lpm	r0, Z+
+  34:	0d 92       	st	X+, r0
+  36:	a2 36       	cpi	r26, 0x62	; 98
+  38:	b1 07       	cpc	r27, r17
+  3a:	d9 f7       	brne	.-10     	; 0x32 <__do_copy_data+0xc>
+
+0000003c <__do_clear_bss>:
+  3c:	20 e0       	ldi	r18, 0x00	; 0
+  3e:	a2 e6       	ldi	r26, 0x62	; 98
+  40:	b0 e0       	ldi	r27, 0x00	; 0
+  42:	01 c0       	rjmp	.+2      	; 0x46 <.do_clear_bss_start>
+
+00000044 <.do_clear_bss_loop>:
+  44:	1d 92       	st	X+, r1
+
+00000046 <.do_clear_bss_start>:
+  46:	a4 36       	cpi	r26, 0x64	; 100
+  48:	b2 07       	cpc	r27, r18
+  4a:	e1 f7       	brne	.-8      	; 0x44 <.do_clear_bss_loop>
+  4c:	16 d0       	rcall	.+44     	; 0x7a <main>
+  4e:	d2 c0       	rjmp	.+420    	; 0x1f4 <_exit>
+
+00000050 <__bad_interrupt>:
+  50:	d7 cf       	rjmp	.-82     	; 0x0 <__vectors>
+
+00000052 <__vector_1>:
+
+//****************************************************************************************
+// External Interrupt 0 service routine
+//****************************************************************************************
+ISR (INT0_vect)
+{
+  52:	1f 92       	push	r1
+  54:	0f 92       	push	r0
+  56:	0f b6       	in	r0, 0x3f	; 63
+  58:	0f 92       	push	r0
+  5a:	11 24       	eor	r1, r1
+	//---------------------------------------------------------------------------------------
+
+	//---------------------------------------------------------------------------------------
+	return;
+};
+  5c:	0f 90       	pop	r0
+  5e:	0f be       	out	0x3f, r0	; 63
+  60:	0f 90       	pop	r0
+  62:	1f 90       	pop	r1
+  64:	18 95       	reti
+
+00000066 <__vector_5>:
+
+//****************************************************************************************
+// Timer0 overflow interrupt service routine
+//****************************************************************************************
+ISR (TIMER0_OVF_vect)
+{
+  66:	1f 92       	push	r1
+  68:	0f 92       	push	r0
+  6a:	0f b6       	in	r0, 0x3f	; 63
+  6c:	0f 92       	push	r0
+  6e:	11 24       	eor	r1, r1
+	//---------------------------------------------------------------------------------------
+
+	//---------------------------------------------------------------------------------------
+	return;
+};
+  70:	0f 90       	pop	r0
+  72:	0f be       	out	0x3f, r0	; 63
+  74:	0f 90       	pop	r0
+  76:	1f 90       	pop	r1
+  78:	18 95       	reti
+
+0000007a <main>:
+static void init_periphery (void)
+{
+	//---------------------------------------------------------------------------------------
+	// Crystal Oscillator division factor: 1
+	//#pragma optsize-
+	CLKPR=0x80;
+  7a:	80 e8       	ldi	r24, 0x80	; 128
+  7c:	86 bd       	out	0x26, r24	; 38
+	CLKPR=0x00;
+  7e:	16 bc       	out	0x26, r1	; 38
+	//---------------------------------------------------------------------------------------
+	// Input/Output Ports initialization
+	// Port B initialization
+	// Func5=Out Func4=Out Func3=Out Func2=In Func1=In Func0=In
+	// State5=0 State4=0 State3=0 State2=P State1=P State0=P
+	PORTB=0x07;
+  80:	97 e0       	ldi	r25, 0x07	; 7
+  82:	98 bb       	out	0x18, r25	; 24
+	DDRB=0x38;
+  84:	98 e3       	ldi	r25, 0x38	; 56
+  86:	97 bb       	out	0x17, r25	; 23
+	// Clock source: System Clock
+	// Clock value: Timer 0 Stopped
+	// Mode: Normal top=0xFF
+	// OC0A output: Disconnected
+	// OC0B output: Disconnected
+	TCCR0A=0x00;
+  88:	1a bc       	out	0x2a, r1	; 42
+	TCCR0B=0x00;
+  8a:	13 be       	out	0x33, r1	; 51
+	TCNT0=0x00;
+  8c:	12 be       	out	0x32, r1	; 50
+	OCR0A=0x00;
+  8e:	19 bc       	out	0x29, r1	; 41
+	OCR0B=0x00;
+  90:	18 bc       	out	0x28, r1	; 40
+	// OC1A output: Disconnected
+	// OC1B output: Disconnected
+	// Timer1 Overflow Interrupt: Off
+	// Compare A Match Interrupt: Off
+	// Compare B Match Interrupt: Off
+	PLLCSR=0x00;
+  92:	17 bc       	out	0x27, r1	; 39
+
+	TCCR1=0x00;
+  94:	10 be       	out	0x30, r1	; 48
+	GTCCR=0x00;
+  96:	1c bc       	out	0x2c, r1	; 44
+	TCNT1=0x00;
+  98:	1f bc       	out	0x2f, r1	; 47
+	OCR1A=0x00;
+  9a:	1e bc       	out	0x2e, r1	; 46
+	OCR1B=0x00;
+  9c:	1b bc       	out	0x2b, r1	; 43
+	OCR1C=0x00;
+  9e:	1d bc       	out	0x2d, r1	; 45
+
+	// External Interrupt(s) initialization
+	// INT0: On
+	// INT0 Mode: Falling Edge
+	// Interrupt on any change on pins PCINT0-5: Off
+	GIMSK=0x40;
+  a0:	90 e4       	ldi	r25, 0x40	; 64
+  a2:	9b bf       	out	0x3b, r25	; 59
+	MCUCR=0x02;
+  a4:	22 e0       	ldi	r18, 0x02	; 2
+  a6:	25 bf       	out	0x35, r18	; 53
+	GIFR=0x40;
+  a8:	9a bf       	out	0x3a, r25	; 58
+
+	// Timer(s)/Counter(s) Interrupt(s) initialization
+	TIMSK=0x00;
+  aa:	19 be       	out	0x39, r1	; 57
+
+	// Universal Serial Interface initialization
+	// Mode: Disabled
+	// Clock source: Register & Counter=no clk.
+	// USI Counter Overflow Interrupt: Off
+	USICR=0x00;
+  ac:	1d b8       	out	0x0d, r1	; 13
+
+	// Analog Comparator initialization
+	// Analog Comparator: Off
+	ACSR=0x80;
+  ae:	88 b9       	out	0x08, r24	; 8
+	ADCSRB=0x00;
+  b0:	13 b8       	out	0x03, r1	; 3
+	DIDR0=0x00;
+  b2:	14 ba       	out	0x14, r1	; 20
+
+	// ADC initialization
+	// ADC disabled
+	ADCSRA=0x00;
+  b4:	16 b8       	out	0x06, r1	; 6
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+  b6:	2f ef       	ldi	r18, 0xFF	; 255
+  b8:	80 e7       	ldi	r24, 0x70	; 112
+  ba:	92 e0       	ldi	r25, 0x02	; 2
+  bc:	21 50       	subi	r18, 0x01	; 1
+  be:	80 40       	sbci	r24, 0x00	; 0
+  c0:	90 40       	sbci	r25, 0x00	; 0
+  c2:	e1 f7       	brne	.-8      	; 0xbc <main+0x42>
+  c4:	00 c0       	rjmp	.+0      	; 0xc6 <main+0x4c>
+  c6:	00 00       	nop
+
+int main(void)
+{
+	
+	unsigned int i=0x00;
+  c8:	e0 e0       	ldi	r30, 0x00	; 0
+  ca:	f0 e0       	ldi	r31, 0x00	; 0
+				else
+				{
+					CLK_OUT_OFF;
+				};
+				//---------------------------------------------------------------------------------------
+				for (unsigned int j=0x00;((j<speed)&&(CS==0x01));j++)
+  cc:	e1 2c       	mov	r14, r1
+  ce:	f1 2c       	mov	r15, r1
+  d0:	de 2d       	mov	r29, r14
+  d2:	cf 2d       	mov	r28, r15
+	init_periphery ();
+    while(1)
+    {
+        //TODO:: Please write your application code 
+		//---------------------------------------------------------------------------------------
+		if (CS==0x01)				
+  d4:	0f e0       	ldi	r16, 0x0F	; 15
+  d6:	10 e1       	ldi	r17, 0x10	; 16
+  d8:	01 c0       	rjmp	.+2      	; 0xdc <main+0x62>
+				//---------------------------------------------------------------------------------------
+			};
+			//---------------------------------------------------------------------------------------
+ 			steps=temp_steps;
+			speed=temp_speed;
+			i=0x00;
+  da:	f7 01       	movw	r30, r14
+	init_periphery ();
+    while(1)
+    {
+        //TODO:: Please write your application code 
+		//---------------------------------------------------------------------------------------
+		if (CS==0x01)				
+  dc:	b2 9b       	sbis	0x16, 2	; 22
+  de:	4c c0       	rjmp	.+152    	; 0x178 <__stack+0x99>
+		{
+			//---------------------------------------------------------------------------------------
+			for (;((i<steps)&&(CS==0x01));i++)
+  e0:	80 91 62 00 	lds	r24, 0x0062
+  e4:	90 91 63 00 	lds	r25, 0x0063
+  e8:	e8 17       	cp	r30, r24
+  ea:	f9 07       	cpc	r31, r25
+  ec:	b8 f7       	brcc	.-18     	; 0xdc <main+0x62>
+  ee:	b2 9b       	sbis	0x16, 2	; 22
+  f0:	f5 cf       	rjmp	.-22     	; 0xdc <main+0x62>
+			{
+				//---------------------------------------------------------------------------------------
+				if (CLK_OUT==0x00)
+  f2:	c3 99       	sbic	0x18, 3	; 24
+  f4:	02 c0       	rjmp	.+4      	; 0xfa <__stack+0x1b>
+				{
+					CLK_OUT_ON;
+  f6:	c3 9a       	sbi	0x18, 3	; 24
+  f8:	01 c0       	rjmp	.+2      	; 0xfc <__stack+0x1d>
+				}
+				else
+				{
+					CLK_OUT_OFF;
+  fa:	c3 98       	cbi	0x18, 3	; 24
+				};
+				//---------------------------------------------------------------------------------------
+				for (unsigned int j=0x00;((j<speed)&&(CS==0x01));j++)
+  fc:	80 91 60 00 	lds	r24, 0x0060
+ 100:	90 91 61 00 	lds	r25, 0x0061
+ 104:	89 2b       	or	r24, r25
+ 106:	a1 f0       	breq	.+40     	; 0x130 <__stack+0x51>
+ 108:	b2 9b       	sbis	0x16, 2	; 22
+ 10a:	12 c0       	rjmp	.+36     	; 0x130 <__stack+0x51>
+ 10c:	8d 2f       	mov	r24, r29
+ 10e:	9c 2f       	mov	r25, r28
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 110:	af e8       	ldi	r26, 0x8F	; 143
+ 112:	b1 e0       	ldi	r27, 0x01	; 1
+ 114:	11 97       	sbiw	r26, 0x01	; 1
+ 116:	f1 f7       	brne	.-4      	; 0x114 <__stack+0x35>
+ 118:	00 c0       	rjmp	.+0      	; 0x11a <__stack+0x3b>
+ 11a:	00 00       	nop
+ 11c:	01 96       	adiw	r24, 0x01	; 1
+ 11e:	20 91 60 00 	lds	r18, 0x0060
+ 122:	30 91 61 00 	lds	r19, 0x0061
+ 126:	82 17       	cp	r24, r18
+ 128:	93 07       	cpc	r25, r19
+ 12a:	10 f4       	brcc	.+4      	; 0x130 <__stack+0x51>
+ 12c:	b2 99       	sbic	0x16, 2	; 22
+ 12e:	f0 cf       	rjmp	.-32     	; 0x110 <__stack+0x31>
+        //TODO:: Please write your application code 
+		//---------------------------------------------------------------------------------------
+		if (CS==0x01)				
+		{
+			//---------------------------------------------------------------------------------------
+			for (;((i<steps)&&(CS==0x01));i++)
+ 130:	31 96       	adiw	r30, 0x01	; 1
+ 132:	80 91 62 00 	lds	r24, 0x0062
+ 136:	90 91 63 00 	lds	r25, 0x0063
+ 13a:	e8 17       	cp	r30, r24
+ 13c:	f9 07       	cpc	r31, r25
+ 13e:	70 f6       	brcc	.-100    	; 0xdc <main+0x62>
+ 140:	b2 99       	sbic	0x16, 2	; 22
+ 142:	d7 cf       	rjmp	.-82     	; 0xf2 <__stack+0x13>
+ 144:	cb cf       	rjmp	.-106    	; 0xdc <main+0x62>
+ 146:	b2 e0       	ldi	r27, 0x02	; 2
+ 148:	ba 95       	dec	r27
+ 14a:	f1 f7       	brne	.-4      	; 0x148 <__stack+0x69>
+ 14c:	00 c0       	rjmp	.+0      	; 0x14e <__stack+0x6f>
+			unsigned int temp_speed=0x00;
+			//---------------------------------------------------------------------------------------
+			for (unsigned char bit = 0; bit < 15; bit++) 
+			{
+				//---------------------------------------------------------------------------------------
+				while(CLK==0x01)
+ 14e:	b1 99       	sbic	0x16, 1	; 22
+ 150:	fa cf       	rjmp	.-12     	; 0x146 <__stack+0x67>
+				{
+					_delay_us(1);
+				};
+				temp_steps |= S_DATA_IN;
+ 152:	96 b3       	in	r25, 0x16	; 22
+ 154:	69 2f       	mov	r22, r25
+ 156:	61 70       	andi	r22, 0x01	; 1
+ 158:	70 e0       	ldi	r23, 0x00	; 0
+ 15a:	26 2b       	or	r18, r22
+ 15c:	37 2b       	or	r19, r23
+				temp_steps <<= 1;
+ 15e:	22 0f       	add	r18, r18
+ 160:	33 1f       	adc	r19, r19
+				while(CLK==0x00)
+ 162:	b1 99       	sbic	0x16, 1	; 22
+ 164:	06 c0       	rjmp	.+12     	; 0x172 <__stack+0x93>
+ 166:	f2 e0       	ldi	r31, 0x02	; 2
+ 168:	fa 95       	dec	r31
+ 16a:	f1 f7       	brne	.-4      	; 0x168 <__stack+0x89>
+ 16c:	00 c0       	rjmp	.+0      	; 0x16e <__stack+0x8f>
+ 16e:	b1 9b       	sbis	0x16, 1	; 22
+ 170:	fa cf       	rjmp	.-12     	; 0x166 <__stack+0x87>
+ 172:	81 50       	subi	r24, 0x01	; 1
+		{
+			//---------------------------------------------------------------------------------------
+			unsigned int temp_steps=0x00;
+			unsigned int temp_speed=0x00;
+			//---------------------------------------------------------------------------------------
+			for (unsigned char bit = 0; bit < 15; bit++) 
+ 174:	19 f4       	brne	.+6      	; 0x17c <__stack+0x9d>
+ 176:	05 c0       	rjmp	.+10     	; 0x182 <__stack+0xa3>
+	init_periphery ();
+    while(1)
+    {
+        //TODO:: Please write your application code 
+		//---------------------------------------------------------------------------------------
+		if (CS==0x01)				
+ 178:	80 2f       	mov	r24, r16
+ 17a:	97 01       	movw	r18, r14
+			unsigned int temp_speed=0x00;
+			//---------------------------------------------------------------------------------------
+			for (unsigned char bit = 0; bit < 15; bit++) 
+			{
+				//---------------------------------------------------------------------------------------
+				while(CLK==0x01)
+ 17c:	b1 99       	sbic	0x16, 1	; 22
+ 17e:	e3 cf       	rjmp	.-58     	; 0x146 <__stack+0x67>
+ 180:	e8 cf       	rjmp	.-48     	; 0x152 <__stack+0x73>
+					_delay_us(1);
+				};
+				//---------------------------------------------------------------------------------------
+			};
+			//---------------------------------------------------------------------------------------
+			while(CS==0x01)
+ 182:	b2 9b       	sbis	0x16, 2	; 22
+ 184:	34 c0       	rjmp	.+104    	; 0x1ee <__stack+0x10f>
+ 186:	82 e0       	ldi	r24, 0x02	; 2
+ 188:	8a 95       	dec	r24
+ 18a:	f1 f7       	brne	.-4      	; 0x188 <__stack+0xa9>
+ 18c:	00 c0       	rjmp	.+0      	; 0x18e <__stack+0xaf>
+ 18e:	b2 99       	sbic	0x16, 2	; 22
+ 190:	fa cf       	rjmp	.-12     	; 0x186 <__stack+0xa7>
+ 192:	2d c0       	rjmp	.+90     	; 0x1ee <__stack+0x10f>
+ 194:	a2 e0       	ldi	r26, 0x02	; 2
+ 196:	aa 95       	dec	r26
+ 198:	f1 f7       	brne	.-4      	; 0x196 <__stack+0xb7>
+ 19a:	00 c0       	rjmp	.+0      	; 0x19c <__stack+0xbd>
+			};
+			//---------------------------------------------------------------------------------------
+			for (unsigned char bit = 0; bit < 16; bit++)
+			{
+				//---------------------------------------------------------------------------------------
+				while(CLK==0x01)
+ 19c:	b1 99       	sbic	0x16, 1	; 22
+ 19e:	fa cf       	rjmp	.-12     	; 0x194 <__stack+0xb5>
+				{
+					_delay_us(1);
+				};
+				temp_speed |= S_DATA_IN;
+ 1a0:	f6 b3       	in	r31, 0x16	; 22
+ 1a2:	4f 2f       	mov	r20, r31
+ 1a4:	41 70       	andi	r20, 0x01	; 1
+ 1a6:	50 e0       	ldi	r21, 0x00	; 0
+ 1a8:	84 2b       	or	r24, r20
+ 1aa:	95 2b       	or	r25, r21
+				temp_speed <<= 1;
+ 1ac:	88 0f       	add	r24, r24
+ 1ae:	99 1f       	adc	r25, r25
+				while(CLK==0x00)
+ 1b0:	b1 99       	sbic	0x16, 1	; 22
+ 1b2:	06 c0       	rjmp	.+12     	; 0x1c0 <__stack+0xe1>
+ 1b4:	b2 e0       	ldi	r27, 0x02	; 2
+ 1b6:	ba 95       	dec	r27
+ 1b8:	f1 f7       	brne	.-4      	; 0x1b6 <__stack+0xd7>
+ 1ba:	00 c0       	rjmp	.+0      	; 0x1bc <__stack+0xdd>
+ 1bc:	b1 9b       	sbis	0x16, 1	; 22
+ 1be:	fa cf       	rjmp	.-12     	; 0x1b4 <__stack+0xd5>
+ 1c0:	e1 50       	subi	r30, 0x01	; 1
+			while(CS==0x01)
+			{
+				_delay_us(1);
+			};
+			//---------------------------------------------------------------------------------------
+			for (unsigned char bit = 0; bit < 16; bit++)
+ 1c2:	19 f0       	breq	.+6      	; 0x1ca <__stack+0xeb>
+			{
+				//---------------------------------------------------------------------------------------
+				while(CLK==0x01)
+ 1c4:	b1 99       	sbic	0x16, 1	; 22
+ 1c6:	e6 cf       	rjmp	.-52     	; 0x194 <__stack+0xb5>
+ 1c8:	eb cf       	rjmp	.-42     	; 0x1a0 <__stack+0xc1>
+					_delay_us(1);
+				};
+				//---------------------------------------------------------------------------------------
+			};
+			//---------------------------------------------------------------------------------------
+ 			steps=temp_steps;
+ 1ca:	30 93 63 00 	sts	0x0063, r19
+ 1ce:	20 93 62 00 	sts	0x0062, r18
+			speed=temp_speed;
+ 1d2:	90 93 61 00 	sts	0x0061, r25
+ 1d6:	80 93 60 00 	sts	0x0060, r24
+			i=0x00;
+			//---------------------------------------------------------------------------------------
+			while(CS==0x00)
+ 1da:	b2 99       	sbic	0x16, 2	; 22
+ 1dc:	7e cf       	rjmp	.-260    	; 0xda <main+0x60>
+ 1de:	f2 e0       	ldi	r31, 0x02	; 2
+ 1e0:	fa 95       	dec	r31
+ 1e2:	f1 f7       	brne	.-4      	; 0x1e0 <__stack+0x101>
+ 1e4:	00 c0       	rjmp	.+0      	; 0x1e6 <__stack+0x107>
+ 1e6:	b2 9b       	sbis	0x16, 2	; 22
+ 1e8:	fa cf       	rjmp	.-12     	; 0x1de <__stack+0xff>
+				//---------------------------------------------------------------------------------------
+			};
+			//---------------------------------------------------------------------------------------
+ 			steps=temp_steps;
+			speed=temp_speed;
+			i=0x00;
+ 1ea:	f7 01       	movw	r30, r14
+ 1ec:	77 cf       	rjmp	.-274    	; 0xdc <main+0x62>
+	init_periphery ();
+    while(1)
+    {
+        //TODO:: Please write your application code 
+		//---------------------------------------------------------------------------------------
+		if (CS==0x01)				
+ 1ee:	e1 2f       	mov	r30, r17
+ 1f0:	c7 01       	movw	r24, r14
+ 1f2:	e8 cf       	rjmp	.-48     	; 0x1c4 <__stack+0xe5>
+
+000001f4 <_exit>:
+ 1f4:	f8 94       	cli
+
+000001f6 <__stop_program>:
+ 1f6:	ff cf       	rjmp	.-2      	; 0x1f6 <__stop_program>
