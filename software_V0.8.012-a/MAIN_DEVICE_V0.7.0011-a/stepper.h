@@ -29,13 +29,11 @@
 void start_work(unsigned int length_1,unsigned int speed_1,unsigned int speed_2)
 {
 	//---------------------------------------------------------------------------------------
-	double length=(double)length_1*(double)speed_2;
-	//float length=(float)length_1*(float)speed_2;
-	length=length/((double)speed_1);
-	//length=length/((float)speed_1);
-	unsigned int length_2 = (unsigned int)length;
-	speed_1=32000/speed_1;
-	speed_2=32000/speed_2;
+	
+	//unsigned int length_2 = ((unsigned long int)length_1*(unsigned long int)speed_2)/(unsigned long int)speed_1;
+	unsigned int length_2 = ((double)length_1)*((double)((double)speed_1)/((double)speed_2));
+	//speed_1=32000/speed_1;
+	//speed_2=32000/speed_2;
 	//---------------------------------------------------------------------------------------
 	CLR_CS_1;
 	_delay_us(10);

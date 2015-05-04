@@ -36,7 +36,7 @@ int main(void)
 {
 	//---------------------------------------------------------------------------------------
 	unsigned char button = 0x00, menu_item_father = 0x00, menu_item_child = 0x01;
-	unsigned int length_1 = 500, speed_1 = 8500, speed_2 = 6000;
+	unsigned int length_1 = 10, speed_1 = 4, speed_2 = 5;
 	float temp = speed_2;
 	//---------------------------------------------------------------------------------------
 	init_mcu();

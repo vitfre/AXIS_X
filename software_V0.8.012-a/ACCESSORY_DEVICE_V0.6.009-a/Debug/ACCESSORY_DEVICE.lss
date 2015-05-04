@@ -3,33 +3,33 @@ ACCESSORY_DEVICE.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         000001f8  00000000  00000000  00000094  2**1
+  0 .text         000001fc  00000000  00000000  00000094  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .data         00000002  00800060  000001f8  0000028c  2**0
+  1 .data         00000002  00800060  000001fc  00000290  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  2 .bss          00000002  00800062  00800062  0000028e  2**0
+  2 .bss          00000002  00800062  00800062  00000292  2**0
                   ALLOC
-  3 .stab         000006b4  00000000  00000000  00000290  2**2
+  3 .stab         000006b4  00000000  00000000  00000294  2**2
                   CONTENTS, READONLY, DEBUGGING
-  4 .stabstr      00000097  00000000  00000000  00000944  2**0
+  4 .stabstr      00000097  00000000  00000000  00000948  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .comment      0000002f  00000000  00000000  000009db  2**0
+  5 .comment      0000002f  00000000  00000000  000009df  2**0
                   CONTENTS, READONLY
-  6 .debug_aranges 00000030  00000000  00000000  00000a0a  2**0
+  6 .debug_aranges 00000030  00000000  00000000  00000a0e  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_info   00000402  00000000  00000000  00000a3a  2**0
+  7 .debug_info   00000402  00000000  00000000  00000a3e  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_abbrev 00000173  00000000  00000000  00000e3c  2**0
+  8 .debug_abbrev 00000173  00000000  00000000  00000e40  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_line   00000279  00000000  00000000  00000faf  2**0
+  9 .debug_line   00000279  00000000  00000000  00000fb3  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_frame  0000005c  00000000  00000000  00001228  2**2
+ 10 .debug_frame  0000005c  00000000  00000000  0000122c  2**2
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_str    00000154  00000000  00000000  00001284  2**0
+ 11 .debug_str    00000157  00000000  00000000  00001288  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_loc    00000330  00000000  00000000  000013d8  2**0
+ 12 .debug_loc    00000330  00000000  00000000  000013df  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_ranges 00000070  00000000  00000000  00001708  2**0
+ 13 .debug_ranges 00000070  00000000  00000000  0000170f  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -61,7 +61,7 @@ Disassembly of section .text:
   26:	10 e0       	ldi	r17, 0x00	; 0
   28:	a0 e6       	ldi	r26, 0x60	; 96
   2a:	b0 e0       	ldi	r27, 0x00	; 0
-  2c:	e8 ef       	ldi	r30, 0xF8	; 248
+  2c:	ec ef       	ldi	r30, 0xFC	; 252
   2e:	f1 e0       	ldi	r31, 0x01	; 1
   30:	02 c0       	rjmp	.+4      	; 0x36 <__do_copy_data+0x10>
   32:	05 90       	lpm	r0, Z+
@@ -84,7 +84,7 @@ Disassembly of section .text:
   48:	b2 07       	cpc	r27, r18
   4a:	e1 f7       	brne	.-8      	; 0x44 <.do_clear_bss_loop>
   4c:	16 d0       	rcall	.+44     	; 0x7a <main>
-  4e:	d2 c0       	rjmp	.+420    	; 0x1f4 <_exit>
+  4e:	d4 c0       	rjmp	.+424    	; 0x1f8 <_exit>
 
 00000050 <__bad_interrupt>:
   50:	d7 cf       	rjmp	.-82     	; 0x0 <__vectors>
@@ -274,7 +274,7 @@ int main(void)
 				//---------------------------------------------------------------------------------------
 			};
 			//---------------------------------------------------------------------------------------
- 			steps=temp_steps;
+ 			steps=temp_steps*2;
 			speed=temp_speed;
 			i=0x00;
   da:	f7 01       	movw	r30, r14
@@ -423,14 +423,14 @@ int main(void)
 			//---------------------------------------------------------------------------------------
 			while(CS==0x01)
  182:	b2 9b       	sbis	0x16, 2	; 22
- 184:	34 c0       	rjmp	.+104    	; 0x1ee <__stack+0x10f>
+ 184:	36 c0       	rjmp	.+108    	; 0x1f2 <__stack+0x113>
  186:	82 e0       	ldi	r24, 0x02	; 2
  188:	8a 95       	dec	r24
  18a:	f1 f7       	brne	.-4      	; 0x188 <__stack+0xa9>
  18c:	00 c0       	rjmp	.+0      	; 0x18e <__stack+0xaf>
  18e:	b2 99       	sbic	0x16, 2	; 22
  190:	fa cf       	rjmp	.-12     	; 0x186 <__stack+0xa7>
- 192:	2d c0       	rjmp	.+90     	; 0x1ee <__stack+0x10f>
+ 192:	2f c0       	rjmp	.+94     	; 0x1f2 <__stack+0x113>
  194:	a2 e0       	ldi	r26, 0x02	; 2
  196:	aa 95       	dec	r26
  198:	f1 f7       	brne	.-4      	; 0x196 <__stack+0xb7>
@@ -484,43 +484,45 @@ int main(void)
 				//---------------------------------------------------------------------------------------
 			};
 			//---------------------------------------------------------------------------------------
- 			steps=temp_steps;
- 1ca:	30 93 63 00 	sts	0x0063, r19
- 1ce:	20 93 62 00 	sts	0x0062, r18
+ 			steps=temp_steps*2;
+ 1ca:	22 0f       	add	r18, r18
+ 1cc:	33 1f       	adc	r19, r19
+ 1ce:	30 93 63 00 	sts	0x0063, r19
+ 1d2:	20 93 62 00 	sts	0x0062, r18
 			speed=temp_speed;
- 1d2:	90 93 61 00 	sts	0x0061, r25
- 1d6:	80 93 60 00 	sts	0x0060, r24
+ 1d6:	90 93 61 00 	sts	0x0061, r25
+ 1da:	80 93 60 00 	sts	0x0060, r24
 			i=0x00;
 			//---------------------------------------------------------------------------------------
 			while(CS==0x00)
- 1da:	b2 99       	sbic	0x16, 2	; 22
- 1dc:	7e cf       	rjmp	.-260    	; 0xda <main+0x60>
- 1de:	f2 e0       	ldi	r31, 0x02	; 2
- 1e0:	fa 95       	dec	r31
- 1e2:	f1 f7       	brne	.-4      	; 0x1e0 <__stack+0x101>
- 1e4:	00 c0       	rjmp	.+0      	; 0x1e6 <__stack+0x107>
- 1e6:	b2 9b       	sbis	0x16, 2	; 22
- 1e8:	fa cf       	rjmp	.-12     	; 0x1de <__stack+0xff>
+ 1de:	b2 99       	sbic	0x16, 2	; 22
+ 1e0:	7c cf       	rjmp	.-264    	; 0xda <main+0x60>
+ 1e2:	f2 e0       	ldi	r31, 0x02	; 2
+ 1e4:	fa 95       	dec	r31
+ 1e6:	f1 f7       	brne	.-4      	; 0x1e4 <__stack+0x105>
+ 1e8:	00 c0       	rjmp	.+0      	; 0x1ea <__stack+0x10b>
+ 1ea:	b2 9b       	sbis	0x16, 2	; 22
+ 1ec:	fa cf       	rjmp	.-12     	; 0x1e2 <__stack+0x103>
 				//---------------------------------------------------------------------------------------
 			};
 			//---------------------------------------------------------------------------------------
- 			steps=temp_steps;
+ 			steps=temp_steps*2;
 			speed=temp_speed;
 			i=0x00;
- 1ea:	f7 01       	movw	r30, r14
- 1ec:	77 cf       	rjmp	.-274    	; 0xdc <main+0x62>
+ 1ee:	f7 01       	movw	r30, r14
+ 1f0:	75 cf       	rjmp	.-278    	; 0xdc <main+0x62>
 	init_periphery ();
     while(1)
     {
         //TODO:: Please write your application code 
 		//---------------------------------------------------------------------------------------
 		if (CS==0x01)				
- 1ee:	e1 2f       	mov	r30, r17
- 1f0:	c7 01       	movw	r24, r14
- 1f2:	e8 cf       	rjmp	.-48     	; 0x1c4 <__stack+0xe5>
+ 1f2:	e1 2f       	mov	r30, r17
+ 1f4:	c7 01       	movw	r24, r14
+ 1f6:	e6 cf       	rjmp	.-52     	; 0x1c4 <__stack+0xe5>
 
-000001f4 <_exit>:
- 1f4:	f8 94       	cli
+000001f8 <_exit>:
+ 1f8:	f8 94       	cli
 
-000001f6 <__stop_program>:
- 1f6:	ff cf       	rjmp	.-2      	; 0x1f6 <__stop_program>
+000001fa <__stop_program>:
+ 1fa:	ff cf       	rjmp	.-2      	; 0x1fa <__stop_program>
