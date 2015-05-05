@@ -27,8 +27,8 @@ static void init_periphery (void)
 	// Port B initialization
 	// Func5=Out Func4=Out Func3=Out Func2=In Func1=In Func0=In
 	// State5=0 State4=0 State3=0 State2=P State1=P State0=P
-	PORTB=0x17;
-	DDRB=0x28;
+	PORTB=0x07;
+	DDRB=0x38;
 
 	// Timer/Counter 0 initialization
 	// Clock source: System Clock
@@ -87,7 +87,7 @@ static void init_periphery (void)
 	// ADC disabled
 	ADCSRA=0x00;
 
-	_delay_ms(10);													//Settle pause
+	_delay_ms(100);													//Settle pause
 };
 //***************************************************************************************
 //***************************************************************************************

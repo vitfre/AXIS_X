@@ -27,7 +27,18 @@ ISR (TIMER1_OVF_vect)
 	TCNT1H=0x0B;
 	TCNT1L=0xDC;
 	//---------------------------------------------------------------------------------------
-
+	if (cnt>1)
+	{
+		//---------------------------------------------------------------------------------------
+		cnt--;
+		//---------------------------------------------------------------------------------------
+	} 
+	else
+	{
+		//---------------------------------------------------------------------------------------
+		stop_work();
+		//---------------------------------------------------------------------------------------
+	};
 	//---------------------------------------------------------------------------------------
 	return;
 };
@@ -36,8 +47,8 @@ int main(void)
 {
 	//---------------------------------------------------------------------------------------
 	unsigned char button = 0x00, menu_item_father = 0x00, menu_item_child = 0x01;
-	unsigned int length_1 = 10, speed_1 = 4, speed_2 = 5;
-	float temp = speed_2;
+	unsigned int work_time = 1, time_1 = 0, time_2 = 8;
+	//float temp = speed_2;
 	//---------------------------------------------------------------------------------------
 	init_mcu();
 	BUT_Init();
@@ -48,23 +59,18 @@ int main(void)
 	//---------------------------------------------------------------------------------------
 	init_LCD();
 	uart_1_init();
-	//_delay_ms(20);
 	//Global enable interrupts
 	sei();
 	//---------------------------------------------------------------------------------------
-	//beep_tone(50);
-	//---------------------------------------------------------------------------------------
-	Main_menu (menu_item_father,menu_item_child,length_1,speed_1,speed_2);
+	Main_menu (menu_item_father,menu_item_child,work_time,time_1,time_2);
 	//---------------------------------------------------------------------------------------
 	uart_1_write(0xAA);
 	uart_1_write(0xFF);
 	//---------------------------------------------------------------------------------------
 	all_ok(0);
 	//---------------------------------------------------------------------------------------
-	//beep_tone(50);
-	//---------------------------------------------------------------------------------------
-	//temp=((float)speed_2*5)/40;
-	start_work(length_1,speed_1,temp);
+	start_work(time_1,time_2);
+	cnt=work_time;
 	//---------------------------------------------------------------------------------------
     while(1)
     {
@@ -105,7 +111,7 @@ int main(void)
 							beep_tone(50);
 							menu_item_child=9;
 						};
-						Main_menu (menu_item_father,menu_item_child,length_1,speed_1,speed_2);
+						Main_menu (menu_item_father,menu_item_child,work_time,time_1,time_2);
 						//---------------------------------------------------------------------------------------
 					};
 					break;
@@ -120,7 +126,7 @@ int main(void)
 							beep_tone(50);
 							menu_item_child=1;
 						};
-						Main_menu (menu_item_father,menu_item_child,length_1,speed_1,speed_2);
+						Main_menu (menu_item_father,menu_item_child,work_time,time_1,time_2);
 						//---------------------------------------------------------------------------------------
 					};
 					break;
@@ -129,7 +135,7 @@ int main(void)
 					{
 						//---------------------------------------------------------------------------------------
 						menu_item_father=0x01;
-						Main_menu (menu_item_father,menu_item_child,length_1,speed_1,speed_2);
+						Main_menu (menu_item_father,menu_item_child,work_time,time_1,time_2);
 						//---------------------------------------------------------------------------------------
 					};
 					break;
@@ -151,14 +157,14 @@ int main(void)
 					case 0x01 :
 					{
 						//---------------------------------------------------------------------------------------
-						speed_1++;
+						time_1++;
 						beep_tone(5);
-						if (speed_1>999)
+						if (time_1>999)
 						{
 							beep_tone(50);
-							speed_1=999;
+							time_1=999;
 						};
-						Main_menu (menu_item_father,menu_item_child,length_1,speed_1,speed_2);
+						Main_menu (menu_item_father,menu_item_child,work_time,time_1,time_2);
 						//---------------------------------------------------------------------------------------
 					};
 					break;
@@ -166,14 +172,14 @@ int main(void)
 					case 0x02 :
 					{
 						//---------------------------------------------------------------------------------------
-						speed_1--;
+						time_1--;
 						beep_tone(5);
-						if (speed_1>999)
+						if (time_1>999)
 						{
 							beep_tone(50);
-							speed_1=0;
+							time_1=0;
 						};
-						Main_menu (menu_item_father,menu_item_child,length_1,speed_1,speed_2);
+						Main_menu (menu_item_father,menu_item_child,work_time,time_1,time_2);
 						//---------------------------------------------------------------------------------------
 					};
 					break;
@@ -191,16 +197,16 @@ int main(void)
 						{
 							beep_tone(5);
 							menu_item_father=0x00;
-							Main_menu (menu_item_father,menu_item_child,length_1,speed_1,speed_2);
+							Main_menu (menu_item_father,menu_item_child,work_time,time_1,time_2);
 						} 
 						else
 						{
 							beep_tone(50);
 							menu_item_father=0x02;
-							Main_menu (menu_item_father,menu_item_child,length_1,speed_1,speed_2);
+							Main_menu (menu_item_father,menu_item_child,work_time,time_1,time_2);
 							BUT_SetKey(0x00);
 							//---------------------------------------------------------------------------------------
-							start_work(length_1,speed_1,speed_2);
+							start_work(time_1,time_2);
 							//---------------------------------------------------------------------------------------
 						};
 						//---------------------------------------------------------------------------------------
@@ -210,14 +216,14 @@ int main(void)
 					case 0x04 :
 					{
 						//---------------------------------------------------------------------------------------
-						speed_2++;
+						time_2++;
 						beep_tone(5);
-						if (speed_2>999)
+						if (time_2>999)
 						{
 							beep_tone(50);
-							speed_2=999;
+							time_2=999;
 						};
-						Main_menu (menu_item_father,menu_item_child,length_1,speed_1,speed_2);
+						Main_menu (menu_item_father,menu_item_child,work_time,time_1,time_2);
 						//---------------------------------------------------------------------------------------
 					};
 					break;
@@ -225,14 +231,14 @@ int main(void)
 					case 0x05 :
 					{
 						//---------------------------------------------------------------------------------------
-						speed_2--;
+						time_2--;
 						beep_tone(5);
-						if (speed_2>999)
+						if (time_2>999)
 						{
 							beep_tone(50);
-							speed_2=0;
+							time_2=0;
 						};
-						Main_menu (menu_item_father,menu_item_child,length_1,speed_1,speed_2);
+						Main_menu (menu_item_father,menu_item_child,work_time,time_1,time_2);
 						//---------------------------------------------------------------------------------------
 					};
 					break;
@@ -240,14 +246,14 @@ int main(void)
 					case 0x06 :
 					{
 						//---------------------------------------------------------------------------------------
-						length_1++;
+						work_time++;
 						beep_tone(5);
-						if (length_1>999)
+						if (work_time>999)
 						{
 							beep_tone(50);
-							length_1=999;
+							work_time=999;
 						};
-						Main_menu (menu_item_father,menu_item_child,length_1,speed_1,speed_2);
+						Main_menu (menu_item_father,menu_item_child,work_time,time_1,time_2);
 						//---------------------------------------------------------------------------------------
 					};
 					break;
@@ -255,14 +261,14 @@ int main(void)
 					case 0x07 :
 					{
 						//---------------------------------------------------------------------------------------
-						length_1--;
+						work_time--;
 						beep_tone(5);
-						if (length_1>999)
+						if (work_time>999)
 						{
 							beep_tone(50);
-							length_1=0;
+							work_time=0;
 						};
-						Main_menu (menu_item_father,menu_item_child,length_1,speed_1,speed_2);
+						Main_menu (menu_item_father,menu_item_child,work_time,time_1,time_2);
 						//---------------------------------------------------------------------------------------
 					};
 					break;
@@ -302,7 +308,7 @@ int main(void)
 						//---------------------------------------------------------------------------------------
 						beep_tone(5);
 						menu_item_father=0x01;
-						Main_menu (menu_item_father,menu_item_child,length_1,speed_1,speed_2);
+						Main_menu (menu_item_father,menu_item_child,work_time,time_1,time_2);
 						//---------------------------------------------------------------------------------------
 					};
 					break;

@@ -15,7 +15,7 @@
 //***************************************************************************************
 void init_mcu(void)
 {
-	/*
+/*
 	// Input/Output Ports initialization
 	// Port A initialization
 	// Func7=In Func6=In Func5=In Func4=Out Func3=Out Func2=Out Func1=Out Func0=Out
@@ -34,7 +34,7 @@ void init_mcu(void)
 	// State7=T State6=T State5=T State4=P State3=P State2=P State1=P State0=P
 	PORTC=0x1F;
 	DDRC=0x00;
-*/
+
 	// Port D initialization
 	// Func7=In Func6=In Func5=In Func4=In Func3=In Func2=In Func1=In Func0=Out
 	// State7=T State6=T State5=P State4=P State3=P State2=P State1=P State0=0
@@ -52,13 +52,13 @@ void init_mcu(void)
 	// State7=0 State6=0 State5=0 State4=0 State3=0 State2=0 State1=0 State0=0
 	
 	
-/*
+
 	// Port G initialization
 	// Func4=In Func3=In Func2=In Func1=In Func0=In
 	// State4=T State3=T State2=T State1=T State0=T
 	PORTG=0x00;
 	DDRG=0x00;
-	*/
+*/
 
 	// Timer/Counter 0 initialization
 	// Clock source: System Clock
