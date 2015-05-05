@@ -11,11 +11,6 @@
 #define F_CPU 16000000UL // or whatever may be your frequency
 #define ADC_VREF_TYPE 0xC0
 //---------------------------------------------------------------------------------------
-#define _MOWER_EN	(PORTE|=(1<<1))		//
-#define _MOWER_DIS	(PORTE&=~(1<<1))	//
-#define _MOWER_ON	(PORTE|=(1<<3))		//
-#define _MOWER_RES	(PORTE&=~(1<<3))	//
-//---------------------------------------------------------------------------------------
 #include <avr/io.h>
 //***************************************************************************************
 void init_mcu(void)
@@ -39,31 +34,25 @@ void init_mcu(void)
 	// State7=T State6=T State5=T State4=P State3=P State2=P State1=P State0=P
 	PORTC=0x1F;
 	DDRC=0x00;
-
+*/
 	// Port D initialization
 	// Func7=In Func6=In Func5=In Func4=In Func3=In Func2=In Func1=In Func0=Out
 	// State7=T State6=T State5=P State4=P State3=P State2=P State1=P State0=0
-	PORTD=0x3E;
-	DDRD=0x01;
-*/
+	
+	
+
 	// Port E initialization
 	// Func7=Out Func6=Out Func5=Out Func4=Out Func3=Out Func2=Out Func1=Out Func0=Out
 	// State7=1 State6=1 State5=1 State4=1 State3=0 State2=0 State1=0 State0=0
-	PORTE=0xF0;
-	DDRE=0xFF;
-	_delay_ms(10);
-	//_delay_ms(100);
-	_MOWER_EN;
-	_delay_ms(10);
-	_MOWER_ON;
+	
+	
+
+	// Port F initialization
+	// Func7=Out Func6=Out Func5=Out Func4=Out Func3=In Func2=In Func1=In Func0=In
+	// State7=0 State6=0 State5=0 State4=0 State3=0 State2=0 State1=0 State0=0
+	
 	
 /*
-	// Port F initialization
-	// Func7=In Func6=In Func5=In Func4=In Func3=In Func2=In Func1=In Func0=In
-	// State7=T State6=T State5=T State4=T State3=T State2=T State1=T State0=T
-	PORTF=0x00;
-	DDRF=0x00;
-
 	// Port G initialization
 	// Func4=In Func3=In Func2=In Func1=In Func0=In
 	// State4=T State3=T State2=T State1=T State0=T
@@ -190,6 +179,8 @@ void init_mcu(void)
 	// TWI disabled
 	TWCR=0x00;
 	
+	//---------------------------------------------------------------------------------------
+	_delay_ms(10);
 };
 //***************************************************************************************
 //***************************************************************************************

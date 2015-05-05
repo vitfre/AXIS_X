@@ -15,13 +15,13 @@
 #include <util/delay.h>
 #include <avr/io.h>
 //---------------------------------------------------------------------------------------
-#define BUZZ_LD_INIT		(DDRD|=(1<<6));(PORTD&=~(1<<6));	(DDRA|=(1<<0));(PORTA&=~(1<<0));	(DDRA|=(1<<2));(PORTA&=~(1<<2));	(DDRA|=(1<<3));(PORTA&=~(1<<3));
-#define BUZZ_ON				(PORTD|=(1<<6));
-#define BUZZ_OFF			(PORTD&=~(1<<6));
+#define BUZZ_LD_INIT		(DDRG|=(1<<4));(PORTG&=~(1<<6));	(DDRG|=(1<<0));(PORTG&=~(1<<0));	(DDRG|=(1<<1));(PORTG&=~(1<<1));	(DDRG|=(1<<2));(PORTG&=~(1<<2));
+#define BUZZ_ON				(PORTG|=(1<<4));
+#define BUZZ_OFF			(PORTG&=~(1<<4));
 //---------------------------------------------------------------------------------------
 #define LED_OK				0
-#define LED_busy			2
-#define LED_ERR				3
+#define LED_busy			1
+#define LED_ERR				2
 /**************************************************************************
 *   Function name : Beep_tone
 *   Returns :       нет
