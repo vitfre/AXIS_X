@@ -1,6 +1,6 @@
 /*
  * Delay_line.c
- *
+ *ACCESSORY_DEVICE_V0.6.009-a
  * Created: 02.02.2014 14:00:29
  *  Author: Администратор
  */ 

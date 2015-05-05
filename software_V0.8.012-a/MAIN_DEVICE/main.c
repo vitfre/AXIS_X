@@ -1,6 +1,6 @@
 /*
- * LD.c
- *
+ * main.c
+ *MAIN_DEVICE_V0.7.0011-a
  * Created: 11.02.2014 17:33:24
  *  Author: Администратор
  */ 

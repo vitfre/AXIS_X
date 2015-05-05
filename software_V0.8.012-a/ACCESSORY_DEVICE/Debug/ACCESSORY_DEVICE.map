@@ -387,10 +387,10 @@ LOAD c:/program files (x86)/atmel/atmel toolchain/avr8 gcc/native/3.4.2.1002/avr
  *(.debug_frame)
  .debug_frame   0x00000000       0x5c main.o
 
-.debug_str      0x00000000      0x157
+.debug_str      0x00000000      0x14c
  *(.debug_str)
- .debug_str     0x00000000      0x157 main.o
-                                0x197 (size before relaxing)
+ .debug_str     0x00000000      0x14c main.o
+                                0x18c (size before relaxing)
 
 .debug_loc      0x00000000      0x330
  *(.debug_loc)
