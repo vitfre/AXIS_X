@@ -47,7 +47,7 @@ int main(void)
 {
 	//---------------------------------------------------------------------------------------
 	unsigned char button = 0x00, menu_item_father = 0x00, menu_item_child = 0x01;
-	unsigned int work_time = 1, time_1 = 0, time_2 = 8;
+	unsigned int work_time = 1, time_1 = 4, time_2 = 8;
 	//float temp = speed_2;
 	//---------------------------------------------------------------------------------------
 	init_mcu();
