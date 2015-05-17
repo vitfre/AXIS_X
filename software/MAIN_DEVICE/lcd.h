@@ -16,17 +16,24 @@
 //---------------------------------------------------------------------------------------
 #include "bit_macros.h"
 //---------------------------------------------------------------------------------------
-#define lcd_mask 				(1<<D6)|(1<<D7)|(1<<lcd_rs)|(1<<lcd_e)
-#define lcd_mask_2 				(1<<D4)|(1<<D5)
+#define lcd_mask 				(1<<D4)|(1<<D5)|(1<<lcd_rs)|(1<<lcd_e)
+#define lcd_mask_2 				(1<<D6)
+#define lcd_mask_3 				(1<<D7)
 //---------------------------------------------------------------------------------------
 #define lcd_port				PORTA
 #define lcd_ddrx				DDRA
 #define lcd_port_2				PORTC
 #define lcd_ddrx_2				DDRC
-#define D4						6UL
-#define D5						7UL
+#define lcd_port_3				PORTG
+#define lcd_ddrx_3				DDRG
+#define D4						7UL
+#define D5						6UL
+//#define D4						6UL
+//#define D5						7UL
 #define D6						7UL
-#define D7						6UL
+#define D7						2UL
+//#define D6						7UL
+//#define D7						6UL
 #define lcd_rs					5UL
 //#define lcd_rw				5UL
 #define lcd_e					4UL

@@ -18,23 +18,23 @@
 #define CLR_DATA	(PORTD&=~(1<<7));
 #define SET_CLK		(PORTD|=(1<<6));
 #define CLR_CLK		(PORTD&=~(1<<6));
-#define SET_CS_1	(PORTD|=(1<<5));
-#define CLR_CS_1	(PORTD&=~(1<<5));
-#define SET_CS_2	(PORTD|=(1<<4));
-#define CLR_CS_2	(PORTD&=~(1<<4));
+#define SET_CS_1	(PORTD|=(1<<4));
+#define CLR_CS_1	(PORTD&=~(1<<4));
+#define SET_CS_2	(PORTD|=(1<<5));
+#define CLR_CS_2	(PORTD&=~(1<<5));
 //---------------------------------------------------------------------------------------
-#define _MOWER_W	(PORTD&=~(1<<0));	TCNT1H=0x0B;TCNT1L=0xDC;	// Reinitialize Timer1 value
-#define _MOWER_S	(PORTD|=(1<<0));	//
+#define _MOWER_W	(PORTF&=~(1<<1));	TCNT1H=0x0B;TCNT1L=0xDC;	// Reinitialize Timer1 value
+#define _MOWER_S	(PORTF|=(1<<1));	//
 //---------------------------------------------------------------------------------------
-#define _MOWER_EN	(PORTF|=(1<<5));	//
-#define _MOWER_DIS	(PORTF&=~(1<<5));	//
-#define _MOWER_ON	(PORTF|=(1<<4));	//
-#define _MOWER_RES	(PORTF&=~(1<<4));	//
+#define _MOWER_EN	(PORTF|=(1<<2));	//
+#define _MOWER_DIS	(PORTF&=~(1<<2));	//
+#define _MOWER_ON	(PORTF|=(1<<3));	//
+#define _MOWER_RES	(PORTF&=~(1<<3));	//
 //---------------------------------------------------------------------------------------
-#define DIR_UP		(PORTF|=(1<<7));	//
-#define DIR_DOWN	(PORTF&=~(1<<7));	//
-#define DIR_LEFT	(PORTF|=(1<<6));	//
-#define DIR_RIGHT	(PORTF&=~(1<<6));	//
+#define DIR_LEFT	(PORTD|=(1<<0));	//
+#define DIR_RIGHT	(PORTD&=~(1<<0));	//
+#define DIR_UP		(PORTD|=(1<<1));	//
+#define DIR_DOWN	(PORTD&=~(1<<1));	//
 //---------------------------------------------------------------------------------------
 /**************************************************************************
 *   Function name : stepper_init
@@ -45,12 +45,12 @@
 void stepper_init(void)
 {
 	//---------------------------------------------------------------------------------------
-	PORTD=0xF1;
-	DDRD=0xF1;
+	PORTD |= (1<<0)|(1<<1)|(1<<4)|(1<<5)|(1<<6)|(1<<7);
+	DDRD |= (1<<0)|(1<<1)|(1<<4)|(1<<5)|(1<<6)|(1<<7);
 	_delay_ms(10);
+	PORTF |= (1<<1)|(1<<2)|(1<<3);
+	DDRF |= (1<<1)|(1<<2)|(1<<3);
 	//---------------------------------------------------------------------------------------
-	PORTF=0x00;
-	DDRF=0xF0;
 	_delay_ms(10);
 	//---------------------------------------------------------------------------------------
 	_MOWER_EN

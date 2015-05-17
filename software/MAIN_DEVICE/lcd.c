@@ -36,24 +36,24 @@ void send_lcd_byte(unsigned char lcd_data,unsigned char rs_status)
 	//****************************************************************************************
     if (BitVal(lcd_data, 7)) 
 	{
-        SetBit(lcd_port,D7);
+        SetBit(lcd_port_3,D7);
     } else {
-        ClrBit(lcd_port,D7);
+        ClrBit(lcd_port_3,D7);
     };
     if (BitVal(lcd_data, 6)) {
-        SetBit(lcd_port,D6);
+        SetBit(lcd_port_2,D6);
     } else {
-        ClrBit(lcd_port,D6);
+        ClrBit(lcd_port_2,D6);
     };
     if (BitVal(lcd_data, 5)) {
-        SetBit(lcd_port_2,D5);
+        SetBit(lcd_port,D5);
     } else {
-        ClrBit(lcd_port_2,D5);
+        ClrBit(lcd_port,D5);
     };
     if (BitVal(lcd_data, 4)) {
-        SetBit(lcd_port_2,D4);
+        SetBit(lcd_port,D4);
     } else {
-        ClrBit(lcd_port_2,D4);
+        ClrBit(lcd_port,D4);
     };
     //****************************************************************************************
 	_delay_us(50);//_delay_ms(1);
@@ -64,27 +64,27 @@ void send_lcd_byte(unsigned char lcd_data,unsigned char rs_status)
 	//****************************************************************************************
     if (BitVal(lcd_data, 3)) 
 	{
-        SetBit(lcd_port,D7);
+        SetBit(lcd_port_3,D7);
     } else {
-        ClrBit(lcd_port,D7);
+        ClrBit(lcd_port_3,D7);
     };
     if (BitVal(lcd_data, 2)) 
 	{
-        SetBit(lcd_port,D6);
+        SetBit(lcd_port_2,D6);
     } else {
-        ClrBit(lcd_port,D6);
+        ClrBit(lcd_port_2,D6);
     };
     if (BitVal(lcd_data, 1)) 
 	{
-        SetBit(lcd_port_2,D5);
+        SetBit(lcd_port,D5);
     } else {
-        ClrBit(lcd_port_2,D5);
+        ClrBit(lcd_port,D5);
     };
     if (BitVal(lcd_data, 0)) 
 	{
-        SetBit(lcd_port_2,D4);
+        SetBit(lcd_port,D4);
     } else {
-        ClrBit(lcd_port_2,D4);
+        ClrBit(lcd_port,D4);
     };
     //****************************************************************************************
 	_delay_us(50);//_delay_ms(1);
@@ -103,9 +103,14 @@ void init_LCD(void)
 	lcd_port &=~ lcd_mask;
 	lcd_ddrx_2 |= (lcd_mask_2);
 	lcd_port_2 &=~ lcd_mask_2;
+	lcd_ddrx_3|= (lcd_mask_3);
+	lcd_port_3 &=~ lcd_mask_3;
+	
+	
+	
 	_delay_ms(10);
-	SetBit(lcd_port_2,D4);
-	SetBit(lcd_port_2,D5);
+	SetBit(lcd_port,D4);
+	SetBit(lcd_port,D5);
 	_delay_ms(5);
 	/*
 	SetBit(PORTB,lcd_e);
@@ -124,7 +129,7 @@ void init_LCD(void)
 	_delay_ms(2);
 	*/
 	
-	ClrBit(lcd_port_2,D4);
+	ClrBit(lcd_port,D4);
 	_delay_ms(2);
 	SetBit(lcd_port,lcd_e);
 	_delay_ms(2);
